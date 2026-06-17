@@ -311,8 +311,8 @@ export function HeroSection() {
 
         {/* ── RIGHT — floating product illustration ────────────────────── */}
         <div
-          className="hero-photo hidden lg:flex items-center justify-center"
-          style={{ padding: '96px 36px 80px 16px', position: 'relative' }}
+          className="hero-photo flex items-center justify-center"
+          style={{ padding: 'clamp(40px,6vw,96px) clamp(16px,3vw,36px) clamp(32px,4vw,80px) 16px', position: 'relative' }}
         >
           {/* Card stack */}
           <div style={{ position: 'relative', width: '100%', maxWidth: 460 }}>

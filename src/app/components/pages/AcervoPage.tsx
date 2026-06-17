@@ -27,7 +27,6 @@ export function AcervoPage() {
   const [filters, setFilters] = useState<Filters>({ cor: '', aplicacao: '', disponibilidade: '' });
   const [selected, setSelected] = useState<typeof ESPECIES[0] | null>(null);
   const heroRef = useReveal<HTMLElement>(0);
-  const gridRef = useReveal<HTMLDivElement>(60);
 
   const filtered = ESPECIES.filter((e) => {
     if (filters.cor && e.cor !== filters.cor) return false;
@@ -159,11 +158,10 @@ export function AcervoPage() {
       {/* Grid */}
       <section className="py-12 pb-24" style={{ backgroundColor: '#f3f2eb' }}>
         <div className="max-w-[1440px] mx-auto px-20 max-md:px-6">
-          <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-[#311d13]/8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-[#311d13]/8">
             {filtered.map((e) => (
               <button
                 key={e.nome}
-                data-reveal
                 onClick={() => setSelected(e)}
                 className="acervo-card group border-b border-r border-[#311d13]/8 text-left"
               >

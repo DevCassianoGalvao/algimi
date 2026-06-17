@@ -87,10 +87,9 @@ export function Layout() {
       <header
         className="fixed top-0 left-0 right-0 z-50"
         style={{
-          backgroundColor: scrolled ? 'rgba(245,240,232,0.97)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(12px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(49,29,19,0.08)' : '1px solid transparent',
-          transition: 'background-color 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease',
+          backgroundColor: 'rgba(245,240,232,0.97)',
+          backdropFilter: 'blur(12px)',
+          borderBottom: '1px solid rgba(49,29,19,0.08)',
         }}
       >
         {/* Logo left · Links right */}

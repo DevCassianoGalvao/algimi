@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { Link } from 'react-router';
 import { useReveal } from '../hooks/useReveal';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
@@ -26,28 +25,10 @@ const PROJETOS = [
 
 export function ProjetosSection() {
   const titleRef = useReveal<HTMLDivElement>(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!scrollRef.current) return;
-    isDragging.current = true;
-    startX.current = e.pageX - scrollRef.current.offsetLeft;
-    scrollLeft.current = scrollRef.current.scrollLeft;
-  };
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current || !scrollRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    scrollRef.current.scrollLeft = scrollLeft.current - (x - startX.current);
-  };
-  const handleMouseUp = () => { isDragging.current = false; };
 
   return (
-    <section className="py-28 overflow-hidden" style={{ backgroundColor: '#311d13' }}>
-      <div ref={titleRef} className="max-w-[1440px] mx-auto px-20 max-md:px-6 mb-14">
+    <section className="py-28" style={{ backgroundColor: '#311d13' }}>
+      <div ref={titleRef} className="max-w-[1440px] mx-auto px-20 max-md:px-6 mb-14 text-center">
         <h2
           data-reveal
           className="font-display leading-[1.12]"
@@ -62,48 +43,41 @@ export function ProjetosSection() {
         </h2>
       </div>
 
-      {/* Horizontal drag-scroll */}
-      <div
-        ref={scrollRef}
-        className="flex gap-6 overflow-x-auto select-none cursor-grab active:cursor-grabbing pb-2 px-20 max-md:px-6"
-        style={{ scrollbarWidth: 'none' }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-      >
-        {PROJETOS.map((p) => (
-          <Link
-            key={p.slug}
-            to={`/projetos/${p.slug}`}
-            className="group shrink-0 w-[400px] max-md:w-[300px]"
-            style={{ textDecoration: 'none' }}
-          >
-            <div className="aspect-[4/5] overflow-hidden relative">
-              <ImageWithFallback
-                src={p.img}
-                alt={p.nome}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-              />
-              <div className="absolute inset-0 bg-[#311d13] opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
-            </div>
-            <div className="pt-5">
-              <h3
-                className="font-display mb-1"
-                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, fontWeight: 500, color: '#f3f2eb' }}
-              >
-                {p.nome}
-              </h3>
-              <p
-                className="text-[11px] tracking-widest uppercase"
-                style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300, color: '#f3f2eb', opacity: 0.45 }}
-              >
-                {p.local}
-              </p>
-            </div>
-          </Link>
-        ))}
-        <div className="shrink-0 w-16" />
+      {/* Centered grid */}
+      <div className="max-w-[1440px] mx-auto px-20 max-md:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {PROJETOS.map((p) => (
+            <Link
+              key={p.slug}
+              to={`/projetos/${p.slug}`}
+              className="group"
+              style={{ textDecoration: 'none' }}
+            >
+              <div className="aspect-[4/5] overflow-hidden relative">
+                <ImageWithFallback
+                  src={p.img}
+                  alt={p.nome}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                />
+                <div className="absolute inset-0 bg-[#311d13] opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+              </div>
+              <div className="pt-5">
+                <h3
+                  className="font-display mb-1"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, fontWeight: 500, color: '#f3f2eb' }}
+                >
+                  {p.nome}
+                </h3>
+                <p
+                  className="text-[11px] tracking-widest uppercase"
+                  style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 300, color: '#f3f2eb', opacity: 0.45 }}
+                >
+                  {p.local}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
       <div className="max-w-[1440px] mx-auto px-20 max-md:px-6 mt-12">
